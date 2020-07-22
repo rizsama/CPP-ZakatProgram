@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
 
@@ -30,9 +31,22 @@ void fmall()
 		cout << "=======================================================================" <<endl;
 		cout << "Harta dalam bentuk Lainnya                  : " ; cin >> lainnya;
 		cout << "\n=======================================================================\n" <<endl;
-
+		
+		ofstream file;
+		file.open("RekapZakatMal.txt", ios::out);
+		file << "Harta dalam bentuk Tabungan/ Giro/ Deposito : "<<tabungan<<endl;
+		file << "Harta dalam bentuk Logam Mulia (Emas/ Perak): "<<memas<<endl;
+		file << "Harta dalam bentuk Surat Beharga            : "<<surat_berharga<<endl;
+		file << "Harta dalam bentuk Properti                 : "<<properti<<endl;
+		file << "Harta dalam bentuk Kendaraan                : "<<kendaraan<<endl;
+		file << "Harta dalam bentuk Koleksi & Barang Antik   : "<<koleksi_antik<<endl;
+		file << "Harta dalam bentuk Stok Barang Dagangan     : "<<stok_dagang<<endl;
+		file << "Harta dalam bentuk Lainnya                  :  "<<lainnya<<endl;
+		
 		int total_harta = (tabungan+memas+surat_berharga+properti+kendaraan+koleksi_antik+stok_dagang+lainnya);
-
+		
+		file << " Jumlah Harta                               : "<<total_harta<<endl;
+		
 		cout << "JUMLAH HARTA" <<endl;
 		cout << "=>" << total_harta << endl <<endl;
 		cout << "=======================================================================" <<endl <<endl;
@@ -53,6 +67,7 @@ void fmall()
 				cout <<endl;
 				cout << "Jumlah yang Harus Dibayarkan per Bulan     : " << zakat/12 <<endl;
 				cout << "=======================================================================" <<endl <<endl;
+				file <<"Jumlah Zakat yang dibayarkan perTahun "<<zakat<<endl;		
 			}
 			else
 			{
@@ -60,7 +75,9 @@ void fmall()
 				cout << "Apakah wajib membayar Zakat Maal ?" <<endl;
 				cout << "=>Tidak" <<endl;
 				cout << "=======================================================================" <<endl;
+				file<<"Tidak Wajib Membayar Zakat"<<endl;
 			}
+			file.close();
 }
 
 void fpenghasilan()
@@ -77,14 +94,15 @@ void fpenghasilan()
 		cout << "=======================================================================" <<endl;
 		cout<<endl;
 		cout<<endl;
+		
 		cout << "Jumlah Penghasilan Perbulan                : "; cin >>gaji;
 		cout << "=======================================================================" <<endl;
 		cout << "Bonus Pendapatan dan Lain-lain (per Bulan) : "; cin >>bonus;
 		cout << "=======================================================================" <<endl;
 		cout << "Pengeluaran Kebutuhan Pokok per Bulan      : "; cin >>pengeluaran;
 		cout << "\n=======================================================================\n" <<endl;
-
-
+	
+				
 		jumlah = gaji+bonus-pengeluaran; 
 		zakat_penghasilan =jumlah * 2.5/100;
 				
@@ -95,8 +113,14 @@ void fpenghasilan()
 		cout << "Nisab Zakat Penghasilan adalah setara dengan 522 kg beras harga normal" <<endl;
 		cout << endl << endl;
 		cout << "Harga Beras saat ini (dalam Kilogram)" <<endl;
-		cout << "=>10000" <<endl <<endl;		
-	
+		cout << "=>10000" <<endl <<endl;
+				
+		ofstream myfile;
+		myfile.open("RekapZakatPenghasilan.txt", ios::out);
+		myfile << "Jumlah Penghasilan Perbulan                :"<<gaji <<endl;
+		myfile << "Bonus Pendapatan dan Lain-lain (per Bulan) :"<<bonus<<endl;
+		myfile << "Pengeluaran Kebutuhan Pokok per Bulan      :"<<pengeluaran<<endl;
+		myfile << "Jumlah harta                               :"<<jumlah<<endl;
 
 	
 		if(jumlah>=nishab){
@@ -108,12 +132,17 @@ void fpenghasilan()
 			cout <<endl;
 			cout << "Jumlah yang Harus Dibayarkan per Bulan     : " << zakat_penghasilan/12 <<endl;
 			cout << "=======================================================================" <<endl <<endl;
+			myfile << "Wajib Membayar Zakat sebesar " <<zakat_penghasilan<<endl;
 		}else {
 			cout <<endl;
 			cout << "Apakah wajib membayar Zakat Maal ?" <<endl;
 			cout << "=>Tidak" <<endl;
 			cout << "=======================================================================" <<endl;
+			myfile <<"Tidak wajib membayar Zakat"<<endl;
 		}
+		
+
+		myfile.close();
 }
 
 int main()
@@ -129,18 +158,21 @@ int main()
 	cout << "1. Zakat Maal" << endl;
 	cout << "2. Zakat Penghasilan" << endl;	
 
+
 do
 {
-	cout << "Pilih Zakat Yang Ingin Dihitung (1 / 2)\n";  ///Perulangan Memilih Jenis Zakat
+	cout << "Pilih Zakat Yang Ingin Dihitung (1 / 2)\n";
 	cout << "=> "; cin >> pilihan;
 	if (pilihan == 1)
 	{
 		fmall();
+		input_valid = true;
 	}
 
 	else if (pilihan == 2)
 	{
 		fpenghasilan();
+		input_valid = true;
 	}
 	
 	else
