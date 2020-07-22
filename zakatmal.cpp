@@ -124,6 +124,7 @@ int main()
 	bool input_valid = true;
 	bool ulang_valid = true;
 
+	start:
 	cout << "===========PROGRAM HITUNG ZAKAT============" << endl;
 	cout << "1. Zakat Maal" << endl;
 	cout << "2. Zakat Penghasilan" << endl;	
@@ -149,6 +150,24 @@ do
 	}
 
 } while (input_valid == false);
+
+while(ulang_valid){
+	cout << "Ingin Menghitung Zakat Lagi ? (Y/N) : ";
+	cin >> opsiulang;
+	if (opsiulang == 'N' || opsiulang == 'n' )
+	{
+		break;
+	}
+	if (opsiulang == 'Y' || opsiulang == 'y')
+	{
+		goto start;
+	}
+	else if (opsiulang != 'N' && opsiulang != 'n' && opsiulang != 'Y' && opsiulang != 'y')
+	{
+		cout << "Input salah!" <<endl;
+		ulang_valid = true;
+	}
+}
 
 	return 0;
 
