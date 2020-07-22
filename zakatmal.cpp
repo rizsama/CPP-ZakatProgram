@@ -128,6 +128,8 @@ int main()
 	cout << "1. Zakat Maal" << endl;
 	cout << "2. Zakat Penghasilan" << endl;	
 
+do
+{
 	cout << "Pilih Zakat Yang Ingin Dihitung (1 / 2)\n";  ///Perulangan Memilih Jenis Zakat
 	cout << "=> "; cin >> pilihan;
 	if (pilihan == 1)
@@ -145,6 +147,8 @@ int main()
 	cout << "input yang benar!\n";
 		input_valid = false;
 	}
+
+} while (input_valid == false);
 
 	return 0;
 
